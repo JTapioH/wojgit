@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">       
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+        <script>
+        // Koodi tehty mukaillen https://www.w3schools.com/js/js_cookies.asp.
+
+        function setCookie(cname,cvalue) {
+            var d = new Date();
+            document.cookie = cname + "=" + cvalue + ";path=/";
+        }
+
+        function getCookie(cname) {
+            var name = cname + "=";
+            var decodedCookie = decodeURIComponent(document.cookie);
+            var ca = decodedCookie.split(';');
+            for(var i = 0; i < ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == ' ') {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                    return c.substring(name.length, c.length);
+                }
+            }
+            return "";
+        }
+
+        function checkCookie() {
+            var session=getCookie("session");
+            if (session != "") {
+                alert("Istunto jatkuu");
+            } else {
+                alert("Ei löytynyttä istuntoa. Luodaan uusi.");
+                session = Math.floor(Math.random() * 1000000000000);
+                setCookie("session", session);
+            }
+        }
+
+        function logOut() {
+            var session = getCookie("session");
+            document.cookie = "session=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        }
+        </script>
+    </head>
+    <body onload="checkCookie()">
+        <p>Tämä on istunnon seuranta-cookie-sivu. Jos et ole käynyt sivulla kertaakaan sen jälkeen, kun suljit selaimen,<br>
+            sivun pitäisi luoda uusi cookie/istunto ja ilmoittaa, että ei löytynyttä istuntoa, luodaan uusi. Jos taas olet<br>
+            tämän istunnon puitteissa käynyt sivulla, sen pitäisi ilmoittaa, että vanha istunto jatkuu.<br><br>
+            Kirjaudu ulos -nappi poistaa cookien ja kun päivität sivun, se ilmoittaa, ettei istuntoa löydy ja leipaisee uuden.
+        </p>
+        <button onClick="logOut()">Kirjaudu ulos</button>
+    </body>
+</html>
