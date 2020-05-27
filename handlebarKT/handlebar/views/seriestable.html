@@ -1,0 +1,22 @@
+<table>
+    <tr>
+        <th>Nimi</th>
+        <th>Ottelut</th>
+        <th>Voitot</th>
+        <th>Tappiot</th>
+        <th>Tasapelit</th>
+        <th>Pisteet</th>
+        <th>Maaliero</th>
+    </tr>
+    {{#each taulu}}
+        <tr>
+            <td>{{this.Nimi}}</td>
+            <td>{{this.Ottelumaara}}</td>
+            <td>{{this.Voittoja}}</td>
+            <td>{{this.Tappioita}}</td>
+            <td>{{this.Tasapeleja}}</td>
+            <td>{{this.Pisteet}}</td>
+            <td>{{this.Maaliero}}</td>
+        </tr>
+    {{/each}}
+</table>

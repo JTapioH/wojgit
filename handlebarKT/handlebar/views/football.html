@@ -1,0 +1,108 @@
+<!doctype html>
+<title>Example</title>
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/Redmond/jquery-ui.css">
+<script
+    src="https://code.jquery.com/jquery-3.3.1.js"
+    integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+    crossorigin="anonymous"></script>
+
+<script
+    src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"
+    integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30="
+    crossorigin="anonymous"></script>
+<script>
+
+  $(function(){
+
+    // Tämä hakee seriestablesta sisällön main contentiin.
+    $("#st").on("click", function(e) {
+      e.preventDefault();
+      $("#content").load(this.href);
+    })
+
+    $("#pt").on("click", function(e) {
+      e.preventDefault();
+      $("#content").load(this.href);
+    })
+  })
+</script>
+<style>
+body { 
+  display: grid;
+  grid-template-areas: 
+    "header header header"
+    "nav article ads"
+    "footer footer footer";
+  grid-template-rows: 60px 1fr 100px;
+  grid-template-columns: 15% 1fr 25%;
+  grid-gap: 10px;
+  margin: 0;
+  }
+header, footer, article, aside, div {
+  padding: 10px;
+  background: gold;
+}
+#pageHeader {
+  grid-area: header;
+}
+#pageFooter {
+  grid-area: footer;
+}
+#mainArticle { 
+  grid-area: article;      
+  }
+#mainNav { 
+  grid-area: nav; 
+  }
+#siteAds { 
+  grid-area: ads; 
+  }
+</style>
+<body>
+  <header id="pageHeader">
+    <table style="margin-left: auto;"> 
+      <tr>
+        <td>
+            Tervetuloa Jalkapallo-sivulle
+        </td>
+        <td>
+            <select>
+                <option>Valitse toiminto...</option>
+              <!-- Tehtävän 56 clientin pään suoritusta, haetaan valikon arvot index.js:ssä määritetystä taulukosta-->
+              {{#each valikko}}
+                <option>{{this}}</option>
+              {{/each}}
+            </select>        
+        </td>
+      </tr> 
+    </table>
+  </header>
+  <article id="mainArticle">
+      <p>Valitse vasemmalta listalta jotain</p>
+
+      <div id="content">
+
+      </div>
+  </article>
+  <aside id="mainNav">
+    <ul id="nav" style="list-style: none;">
+        <li><a href="/seriestable" id="st">Sarjataulukko</a></li>
+        <li><a href="/playerandteams" id="pt">Pelaajat ja joukkueet</a></li>
+    </ul>
+  </aside>
+  <div id="siteAds">
+    <p>Seuraava tapahtumat</p>
+    <ul style="list-style: none;">
+      <!-- Tehtävän 56 clientin pään suoritusta, haetaan listan arvot index.js:ssä määritetystä taulukosta-->
+      {{#each tulevatTapahtumat}}
+        <li>{{this.pvm}} {{this.nimi}}</li>
+      {{/each}}
+    </ul>
+  </div>
+  <footer id="pageFooter">
+    <div style="text-align: center">
+        <p>Yhteystiedot</p>
+    </div>
+  </footer>
+</body>
